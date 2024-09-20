@@ -1,3 +1,12 @@
+/*
+====================
+Name : 2.c
+Author : Akshay Sharma
+Description : ITIMER_PROF
+Date: 13th Sept, 2024.
+============================================================================
+*/
+
 #include<stdio.h>
 #include<sys/resource.h>
 #include<unistd.h>
