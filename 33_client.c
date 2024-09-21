@@ -71,3 +71,14 @@ int main() {
 
     return 0;
 }
+
+/*
+akshay~$./33_client
+Connected to server.
+Enter message (or 'quit' to exit): Hello
+Server response: Server received: Hello
+Enter message (or 'quit' to exit): What Up?
+Server response: Server received: What Up?
+Enter message (or 'quit' to exit): quit
+Disconnecting from server.
+*/
