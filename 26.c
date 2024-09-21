@@ -8,37 +8,32 @@ Date: 18th Sept, 2024.
 */
 
 #include <stdio.h>
-#include <stdlib.h>
-#include <mqueue.h>
-
-#define MQ_NAME "/my_message_queue"
-#define MQ_FLAGS O_CREAT | O_WRONLY
-
-int main() {
-    mqd_t mqd;
-    struct mq_attr attr;
-    char msg[] = "Hello, world!";
-
-    attr.mq_maxmsg = 10;
-    attr.mq_msgsize = 256;
-
-    mqd = mq_open(MQ_NAME, MQ_FLAGS, 0666, &attr);
-    if (mqd == -1) {
-        perror("mq_open");
-        exit(1);
-    }
-
-    if (mq_send(mqd, msg, sizeof(msg), 0) == -1) {
-        perror("mq_send");
-        exit(1);
-    }
-
-    printf("Message sent!\n");
-    mq_close(mqd);
+#include <sys/msg.h>
+#include <string.h>
+int main()
+{
+    key_t key;
+    int msgid, size;
+    key = ftok(".", 'a');
+    struct msg
+    {
+        long int mytype;
+        char msg[800];
+    } mq;
+    msgid = msgget(key, IPC_CREAT | 0666);
+    printf("Enter a message type to send\n");
+    scanf("%ld", &mq.mytype);
+    printf("Enter a message to send\n");
+    scanf(" %[^\n]", mq.msg);
+    size = strlen(mq.msg);
+    msgsnd(msgid, &mq, size + 1, 0);
     return 0;
-}   
+}
 
 /*
-parallels@ubuntu-linux-22-04-02-desktop:~/Downloads$ ./a.out 
-Message sent!
+akshay~$./a.out
+Enter a message type to send
+65536
+Enter a message to send
+Hello
 */
