@@ -2,7 +2,9 @@
 ============================================================================
 Name : 34b.c
 Author : Akshay Sharma
-Description : 
+Description : Write a program to create a concurrent server.
+a. use fork
+b. use pthread_create
 Date: 18 Aug 2024
 ============================================================================
 */
